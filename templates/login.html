@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -19,11 +20,34 @@
             font-family: 'Noto Sans KR', sans-serif;
         }
 
+        .mydiv1 {
+            /* float: right; */
+            max-width: 400px;
+            margin: 40px auto auto auto;
+        }
+
+        .mydiv1 > h1, h5 {
+            /* float: right; */
+            text-align: center;
+        }
+
+        .wrap {
+            max-width: 400px;
+            margin: 40px auto auto auto;
+
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
         .mytitle {
             background-color: green;
 
-            width: 300px;
+            max-width: 400px;
             height: 200px;
+
+            margin-bottom: 30px;
 
             border-radius: 10px;
             color: white;
@@ -32,15 +56,48 @@
 
             padding: 30px 0px 0px 0px;
 
-            background-image: url('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Foy13q%2FbtsqLwzoMPO%2FU2D5ANHrSGKq6AnkkGmYG0%2Fimg.jpg');
+            background-image: url('https://cdn.pixabay.com/photo/2017/05/05/16/59/public-parking-2287718_640.jpg');
             background-position: center;
             background-size: cover;
         }
 
-        .wrap {
-            width: 300px;
-            margin: 20px auto 0px auto;
+        .mydiv2 {
+
+            max-width: 400px;
+            
+
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            color: black;
         }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 94%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
     </style>
     <!-- <style>
         @import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
@@ -75,7 +132,7 @@
         });
 
         // 회원가입 페이지 이동
-        function signup(){
+        function signup() {
             window.location.href = '/join'
         }
 
@@ -88,7 +145,7 @@
             let formData = new FormData();
             formData.append('username_give', username);
             formData.append('password_give', password);
-            fetch('/login', { method: "POST", body: formData}).then(response => response.json()).then(data => {
+            fetch('/login', { method: "POST", body: formData }).then(response => response.json()).then(data => {
                 // if( data === undefined) {return undefined;}
                 alert(data['msg'])
                 if (data['msg'] == "로그인이 되었습니다.") {
@@ -98,21 +155,26 @@
                     window.location.reload()
                 }
             });
-            
+
         }
     </script>
 </head>
 
 <body>
+    <div class="mydiv1">
+        <h1 class="login1">로그인 페이지</h1>
+        <h5 class="login2">아이디, 비밀번호를 입력하세요</h5>
+    </div>
     <div class="wrap">
         <div class="mytitle">
-            <h1>로그인 페이지</h1>
-            <h5>아이디, 비밀번호를 입력하세요</h5>
+            
         </div>
-        <p>ID : <input id = "myid" type="text" /></p>
-        <p>PW : <input id = "mypw" type="password" /></p>
-        <button onclick = "log_in()">로그인하기</button>
-        <button onclick = "signup()">회원가입하기</button>
+        <div class="mydiv2">
+            <p>ID :</p> <p><input id="myid" type="text" /></p>
+            <p>PW :</p> <p><input id="mypw" type="password" /></p>
+            <button onclick="log_in()">로그인하기</button>
+            <button onclick="signup()">회원가입하기</button>
+        </div>
     </div>
 </body>
 ​

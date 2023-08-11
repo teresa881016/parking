@@ -9,17 +9,46 @@
         crossorigin="anonymous"></script>
     <title>키워드로 장소검색하기</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .all {
+            max-width: 500px;
+            margin: 40px auto auto auto;
+        }
+        .welcome {
+            text-align: center;
+        }
+
+        .container {
+            float:right;
+        }
+    </style>
+
 </head>
 
 
 <body>
+    
+    <div class="all">
+        <div class="container">
+            <!-- 리스트 영역 -->
+            <div id="list">
+                <div class="list-group" id="station-list">
+                    <button onclick="log_out()">로그아웃</button>
+                </div>
+            </div>
+        </div>
+    <div class="welcome" id="user_id">
+       <h1>환영합니다.</h1>
+    </div>
+
     <div id="map" style="width:500px;height:400px;"></div>
     <!-- 현욱 -->
-    <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02374b73a41da84151f322de888e3165"></script>
-    <!-- 재익 -->
     <!-- <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53867b3a8191931a0701833c2998046d"></script> -->
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02374b73a41da84151f322de888e3165"></script> -->
+    <!-- 재익 -->
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53867b3a8191931a0701833c2998046d"></script>
     <!-- 사람마다 카카오톡 API 코드 다름! -->
     {% if x_values %}
     <script>
@@ -51,6 +80,15 @@
             marker.setMap(map);
         }
     </script>
+    <div>
+        <h5>현재 회원님이 위치한 지역을 적어주세요.</h5>
+    </div>
+
+    <!-- 검색 폼 -->
+    <form method="post" action="/">
+        <input type="text" name="search_keyword" placeholder="검색어를 입력하세요">
+        <input type="submit" value="검색">
+    </form>
     <table>
         <thead>
             <tr>
@@ -78,13 +116,17 @@
         };
         var map = new kakao.maps.Map(container, options);
     </script>
-    {% endif %}
+
+    <div>
+        <h5>현재 회원님이 위치한 지역을 적어주세요.</h5>
+    </div>
 
     <!-- 검색 폼 -->
     <form method="post" action="/">
         <input type="text" name="search_keyword" placeholder="검색어를 입력하세요">
         <input type="submit" value="검색">
     </form>
+    {% endif %}
 
     <script>
         // 로그인 확인 후 메인 페이지 표시
@@ -93,6 +135,12 @@
             fetch('/check', { method: "GET" }).then(response => response.json()).then(data => {
                 let member_data = data["result"]
                 console.log(member_data)
+                html1 = ``
+                $('#user_id').empty()
+                if(member_data) {
+                    html1 = `<h1>환영합니다. ${member_data}님</h1>`
+                    $('#user_id').append(html1)
+                }
             })
         }
 
@@ -111,14 +159,8 @@
 
 
 
-    <div class="container">
-        <!-- 리스트 영역 -->
-        <div id="list">
-            <div class="list-group" id="station-list">
-                <button onclick="log_out()">로그아웃하기</button>
-            </div>
-        </div>
-    </div>
+    
+</div>
 
 </body>
 

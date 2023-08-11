@@ -20,11 +20,34 @@
             font-family: 'Noto Sans KR', sans-serif;
         }
 
+        .mydiv1 {
+            /* float: right; */
+            max-width: 400px;
+            margin: 40px auto auto auto;
+        }
+
+        .mydiv1 > h1, h5 {
+            /* float: right; */
+            text-align: center;
+        }
+
+        .wrap {
+            max-width: 400px;
+            margin: 40px auto auto auto;
+
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
         .mytitle {
             background-color: green;
 
-            width: 300px;
+            max-width: 400px;
             height: 200px;
+
+            margin-bottom: 30px;
 
             border-radius: 10px;
             color: white;
@@ -33,14 +56,46 @@
 
             padding: 30px 0px 0px 0px;
 
-            background-image: url('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Foy13q%2FbtsqLwzoMPO%2FU2D5ANHrSGKq6AnkkGmYG0%2Fimg.jpg');
+            background-image: url('https://cdn.pixabay.com/photo/2017/05/05/16/59/public-parking-2287718_640.jpg');
             background-position: center;
             background-size: cover;
         }
 
-        .wrap {
-            width: 300px;
-            margin: 20px auto 0px auto;
+        .mydiv2 {
+
+            max-width: 400px;
+            
+
+            padding: 5px 20px 20px 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 94%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 16px;
         }
     </style>
     <script>
@@ -100,18 +155,25 @@
 </head>
 
 <body>
+
+    <div class="mydiv1">
+        <h1>회원가입 페이지</h1>
+        <h5>빈칸을 작성해 주세요</h5>
+    </div>
+
     <div class="wrap">
         <div class="mytitle">
-            <h1>회원가입 페이지</h1>
+            
         </div>
-        <h5>빈칸을 작성해 주세요</h5>
-        <p>이름 : <input id="name" type="text" /></p>
-        <p>ID : <input id="id" type="text" /></p>
-        <p>PW : <input id="pw" type="password" /></p>
-        <p>PW2 : <input id="pw2" type="password" /></p>
-        <p>닉네임 : <input id="nickname" type="text" /></p>
+        <div class="mydiv2">
+        <p>이름 :</p> <p><input id="name" type="text" /></p>
+        <p>ID :</p> <p><input id="id" type="text" /></p>
+        <p>Password :</p> <p><input id="pw" type="password" /></p>
+        <p>Password check :</p> <p><input id="pw2" type="password" /></p>
+        <p>닉네임 :</p> <p><input id="nickname" type="text" /></p>
         <button onclick="join_order()" type="button" class="btn btn-warning mybtn">회원가입하기</button>
-        <button onclick="log_in()" type="button" class="btn btn-warning mybtn">로그인하기</button>
+        <button onclick="log_in()" type="button" class="btn btn-warning mybtn">로그인 하러가기</button>
+        </div>
     </div>
 </body>
 
