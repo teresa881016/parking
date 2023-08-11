@@ -1,0 +1,125 @@
+<!DOCTYPE html5>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title>키워드로 장소검색하기</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+
+<body>
+    <div id="map" style="width:500px;height:400px;"></div>
+    <!-- 현욱 -->
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02374b73a41da84151f322de888e3165"></script>
+    <!-- 재익 -->
+    <!-- <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53867b3a8191931a0701833c2998046d"></script> -->
+    <!-- 사람마다 카카오톡 API 코드 다름! -->
+    {% if x_values %}
+    <script>
+        let xCenter = '{{x_values[0] | safe}}'
+        let yCenter = '{{y_values[0] | safe}}'
+        var container = document.getElementById('map');
+        var options = {
+            center: new kakao.maps.LatLng(yCenter, xCenter),
+            level: 3
+        };
+        var map = new kakao.maps.Map(container, options);
+        var xValue_list = JSON.parse('{{ x_values|tojson|safe }}');
+        var yValue_list = JSON.parse('{{ y_values|tojson|safe }}');
+        var name_list = JSON.parse('{{ name_values|tojson|safe }}');// 추후에 구현 예정
+        var listLength = xValue_list.length;
+        for (let i = 0; i < listLength; i++) {
+            var xValue = xValue_list[i];
+            var yValue = yValue_list[i];
+            var nameValue = name_list[i];
+
+            var markerPosition = new kakao.maps.LatLng(yValue, xValue);
+
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                position: markerPosition
+            });
+
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+        }
+    </script>
+    <table>
+        <thead>
+            <tr>
+                <th>  </th>
+                <th>주차장 정보</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index in range(x_values|length) %}
+            <tr>
+                <td>{{ name_values[index] }}</td>
+                <td>{{ addr_values[index] }}</td>
+                <td>{{ fee_values[index] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% else %}
+    <script>
+        var container = document.getElementById('map');
+        var options = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            level: 3
+        };
+        var map = new kakao.maps.Map(container, options);
+    </script>
+    {% endif %}
+
+    <!-- 검색 폼 -->
+    <form method="post" action="/">
+        <input type="text" name="search_keyword" placeholder="검색어를 입력하세요">
+        <input type="submit" value="검색">
+    </form>
+
+    <script>
+        // 로그인 확인 후 메인 페이지 표시
+        document.addEventListener('DOMContentLoaded', func);
+        function func() {
+            fetch('/check', { method: "GET" }).then(response => response.json()).then(data => {
+                let member_data = data["result"]
+                console.log(member_data)
+            })
+        }
+
+        // 로그아웃 함수
+        function log_out() {
+            fetch('/logout', { method: "POST" }).then(data => {
+                if (data) {
+                    console.log(data)
+                    alert("로그아웃 되었습니다.")
+                    window.location.href = '/login'
+                }
+
+            })
+        }
+    </script>
+
+
+
+    <div class="container">
+        <!-- 리스트 영역 -->
+        <div id="list">
+            <div class="list-group" id="station-list">
+                <button onclick="log_out()">로그아웃하기</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
