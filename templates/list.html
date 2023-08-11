@@ -22,6 +22,19 @@
         .container {
             float:right;
         }
+        table {
+            width: auto;
+            border-top: 1px solid #444444;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #444444;
+            padding: 5px;
+        }
     </style>
 
 </head>
@@ -89,23 +102,26 @@
         <input type="text" name="search_keyword" placeholder="검색어를 입력하세요">
         <input type="submit" value="검색">
     </form>
-    <table>
-        <thead>
-            <tr>
-                <th>  </th>
-                <th>주차장 정보</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for index in range(x_values|length) %}
-            <tr>
-                <td>{{ name_values[index] }}</td>
-                <td>{{ addr_values[index] }}</td>
-                <td>{{ fee_values[index] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">NO</th>
+                    <th scope="col">주차장 이름</th>
+                    <th scope="col">주차장 지번 주소</th>
+                    <th scope="col">요금</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for index in range(x_values|length) %}
+                <tr>
+                    <td>{{index+1}}</td>
+                    <td>{{ name_values[index] }}</td>
+                    <td>{{ addr_values[index] }}</td>
+                    <td>{{ fee_values[index] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     
     {% else %}
     <script>
